@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.yijia.redisdemo.controller.AnchorController;
 import org.yijia.redisdemo.controller.RedPackageController;
+import org.yijia.redisdemo.controller.RoomController;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -18,6 +19,9 @@ public class MyTest2 {
 
     @Autowired
     private AnchorController anchorController;
+
+    @Autowired
+    private RoomController roomController;
 
     @Autowired
     private RedisHandler redisHandler;
@@ -67,6 +71,20 @@ public class MyTest2 {
     }
 
 
+    @Test
+    public void test_7(){
+        roomController.inRoom("1");
+    }
+
+    @Test
+    public void test_8(){
+        roomController.givingGifts("2",100L);
+    }
+
+    @Test
+    public void test_9(){
+        roomController.outRoom("1");
+    }
 
 
 }

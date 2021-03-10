@@ -13,5 +13,11 @@ public class Constants {
         String ANCHOR = "anchor";
     }
 
+    public interface RoomHelp {
+        String ROOM = "room";
+        String ROOM_USER_HOME = "room:user:home";
+        String ROOM_USER_ACTUAL = "room:user:actual";
+        String ROOM_USER_SAVE = "room:user:save";
+    }
 }
 

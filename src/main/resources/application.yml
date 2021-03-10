@@ -1,0 +1,19 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: REDIS-DEMO
+
+
+
+local:
+  redis:
+    handler:
+      name: redis-demo
+      host: 127.0.0.1
+      port: 6379
+      timeout: 50000
+      password:
+      minIdle: 5
+      maxIdle: 10
+      maxActive: 10

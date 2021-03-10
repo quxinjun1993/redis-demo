@@ -1,12 +1,12 @@
 package org.yijia.redisdemo;
 
 import autumn.tools.redis.RedisHandler;
-import autumn.tools.redis.cmd.Cmd;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.yijia.redisdemo.controller.AnchorController;
 import org.yijia.redisdemo.controller.RedPackageController;
 
 @SpringBootTest
@@ -15,6 +15,9 @@ public class MyTest2 {
 
     @Autowired
     private RedPackageController testController;
+
+    @Autowired
+    private AnchorController anchorController;
 
     @Autowired
     private RedisHandler redisHandler;
@@ -41,4 +44,29 @@ public class MyTest2 {
     public void test_3() {
         testController.getUserPackageRank(true);
     }
+
+
+
+
+
+
+
+    @Test
+    public void test_4(){
+        anchorController.getAllAnchorInfo();
+    }
+
+    @Test
+    public void test_5(){
+        anchorController.beginToShow("1");
+    }
+
+    @Test
+    public void test_6(){
+        anchorController.endToShow("1");
+    }
+
+
+
+
 }

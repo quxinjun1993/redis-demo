@@ -79,7 +79,8 @@ public class RedPackageController {
         Set<String> set = redisHandler.builder().add(Cmd.zset.zrevrange(Constants.PackageHelp.USER_RANK, 0, 0)).exec(Set.class);
         logger.info("结果集:{}", set);
         set.iterator().forEachRemaining(obj -> {
-            logger.info("<----------手气最佳：id为【{}】的用户---------->", obj);
+            String money = redisHandler.builder().add(Cmd.hash.hget(Constants.PackageHelp.USER_PACKAGE_POOL, obj)).exec(String.class);
+            logger.info("<----------手气最佳：id为【{}】的用户,金额：【{}】---------->", obj,money);
         });
     }
 

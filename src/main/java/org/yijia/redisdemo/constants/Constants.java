@@ -8,4 +8,10 @@ public class Constants {
         String USER_RANK = "user:rank";
     }
 
+    public interface AnchorHelp {
+        String ANCHOR_START_POOL = "anchor:start:pool";
+        String ANCHOR = "anchor";
+    }
+
 }
+

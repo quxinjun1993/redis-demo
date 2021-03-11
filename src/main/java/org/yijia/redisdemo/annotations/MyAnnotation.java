@@ -9,7 +9,11 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface MyAnnotation {
 
-    String redisKey() default "";
+//    String redisKey() default "";
 
     boolean isRedis() default true;
+
+    String type() default "String";
+
+    int seconds() default  30;
 }

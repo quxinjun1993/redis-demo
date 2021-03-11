@@ -103,7 +103,7 @@ public class MyTest2 {
 
     @Test
     public void test_10(){
-        interfaceController.getUserInfo();
+        interfaceController.getUserInfo("1","1","1");
     }
 
     @Test

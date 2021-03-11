@@ -29,4 +29,8 @@ public class InterfaceController {
         System.out.println("控制器中：" + map);
         return map;
     }
+
+    public static void main(String[] args) {
+
+    }
 }

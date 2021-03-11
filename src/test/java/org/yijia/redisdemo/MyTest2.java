@@ -11,6 +11,8 @@ import org.yijia.redisdemo.controller.InterfaceController;
 import org.yijia.redisdemo.controller.RedPackageController;
 import org.yijia.redisdemo.controller.RoomController;
 
+import java.util.Properties;
+
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class MyTest2 {
@@ -94,5 +96,10 @@ public class MyTest2 {
     @Test
     public void test_10(){
         interfaceController.getUserInfo();
+    }
+
+    @Test
+    public void test_11(){
+
     }
 }

@@ -6,10 +6,12 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.yijia.redisdemo.constants.Constants;
 import org.yijia.redisdemo.controller.AnchorController;
 import org.yijia.redisdemo.controller.InterfaceController;
 import org.yijia.redisdemo.controller.RedPackageController;
 import org.yijia.redisdemo.controller.RoomController;
+import redis.clients.jedis.Jedis;
 
 import java.util.Properties;
 
@@ -46,7 +48,13 @@ public class MyTest2 {
     @Test
     public void test_2() {
         for (int i = 1; i <= 50; i++) {
-            testController.getRedPackage(i + "");
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    testController.getRedPackage(Thread.currentThread().getName());
+                }
+            });
+            thread.start();
         }
     }
 
@@ -79,12 +87,12 @@ public class MyTest2 {
 
     @Test
     public void test_7(){
-        roomController.inRoom("1");
+        roomController.inRoom("4");
     }
 
     @Test
     public void test_8(){
-        roomController.givingGifts("3",23l);
+        roomController.givingGifts("2",50L);
     }
 
     @Test
@@ -100,6 +108,18 @@ public class MyTest2 {
 
     @Test
     public void test_11(){
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true){
+                    try {
+                        Jedis jedis = new Jedis("127.0.0.1", 6379);
+                        jedis.publish(Constants.RoomHelp.ROOM + ":9527","hello");
+                    }catch (Exception e){
 
+                    }
+                }
+            }
+        });
     }
 }

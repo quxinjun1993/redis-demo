@@ -14,14 +14,16 @@ import org.yijia.redisdemo.constants.Constants;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Tuple;
 
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/room")
 public class RoomController {
 
-    private Logger logger = LoggerFactory.getLogger(RoomController.class);
+    private static final Logger logger = LoggerFactory.getLogger(RoomController.class);
 
     private static final String ROOM_ID = ":9527";
 
@@ -40,7 +42,8 @@ public class RoomController {
                     //送礼物
                     logger.info("<------用户【" + obj.get("userId") + "】向主播送出【" + obj.get("money") + "】元------>");
 //                    Set set = redisHandler.builder().add(Cmd.zset.zrevrange(Constants.RoomHelp.ROOM_USER_ACTUAL + ROOM_ID, 0, -1)).exec(Set.class);
-                    Set<Tuple> set = redisHandler.builder().add(Cmd.zset.zrevrangeWithScores(Constants.RoomHelp.ROOM_USER_ACTUAL + ROOM_ID, 0l, 10l)).exec(Set.class);
+                    Set<Tuple> set = redisHandler.builder().add(Cmd.zset.zrevrangeWithScores(Constants.RoomHelp.ROOM_USER_ACTUAL + ROOM_ID, 0L, 10L)).exec(Set.class);
+                    System.out.println(set);
                     logger.info("*********当前排行榜**********");
                     Iterator<Tuple> iterator = set.iterator();
                     int i = 1;
@@ -85,8 +88,8 @@ public class RoomController {
     /**
      * 送礼物
      *
-     * @param userId
-     * @param money
+     * @param userId 用户id
+     * @param money  金额
      */
     public void givingGifts(String userId, Long money) {
         if (money <= 0) {
@@ -108,7 +111,7 @@ public class RoomController {
     /**
      * 离开房间
      *
-     * @param userId
+     * @param userId 用户id
      */
     public void outRoom(String userId) {
         //同步数据

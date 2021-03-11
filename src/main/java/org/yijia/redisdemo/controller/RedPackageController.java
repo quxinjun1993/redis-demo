@@ -2,7 +2,6 @@ package org.yijia.redisdemo.controller;
 
 import autumn.tools.base.j2se.MapHandler;
 import autumn.tools.base.secret.MD5;
-import autumn.tools.redis.RedisCmdBuilder;
 import autumn.tools.redis.RedisHandler;
 import autumn.tools.redis.cmd.Cmd;
 import org.nutz.lang.Strings;

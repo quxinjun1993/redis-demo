@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.yijia.redisdemo.constants.Constants;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.Tuple;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -38,13 +39,18 @@ public class RoomController {
                 } else if ("2".equals(obj.get("type"))) {
                     //送礼物
                     logger.info("<------用户【" + obj.get("userId") + "】向主播送出【" + obj.get("money") + "】元------>");
-                    //TODO 获取房间榜单
-                    Set set = redisHandler.builder().add(Cmd.zset.zrevrange(Constants.RoomHelp.ROOM_USER_ACTUAL + ROOM_ID, 0, -1)).exec(Set.class);
-                    System.out.println(set.size());
-                    int i = 0;
-                    Iterator iterator = set.iterator();
-                    while (iterator.hasNext()){
-                        System.out.println((i++) + ":" +iterator.next());
+//                    Set set = redisHandler.builder().add(Cmd.zset.zrevrange(Constants.RoomHelp.ROOM_USER_ACTUAL + ROOM_ID, 0, -1)).exec(Set.class);
+                    Set<Tuple> set = redisHandler.builder().add(Cmd.zset.zrevrangeWithScores(Constants.RoomHelp.ROOM_USER_ACTUAL + ROOM_ID, 0l, 10l)).exec(Set.class);
+                    logger.info("*********当前排行榜**********");
+                    Iterator<Tuple> iterator = set.iterator();
+                    int i = 1;
+                    while (iterator.hasNext()) {
+                        Tuple next = iterator.next();
+                        String element = next.getElement();
+                        double score = next.getScore();
+                        if (score != 0.0) {
+                            logger.info("{}.用户【{}】,金额【{}元】", i++, element, score);
+                        }
                     }
                 } else if ("3".equals(obj.get("type"))) {
                     logger.info("<------用户【" + obj.get("userId") + "】离开房间------>");

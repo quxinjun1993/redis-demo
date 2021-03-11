@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.yijia.redisdemo.controller.AnchorController;
+import org.yijia.redisdemo.controller.InterfaceController;
 import org.yijia.redisdemo.controller.RedPackageController;
 import org.yijia.redisdemo.controller.RoomController;
 
@@ -25,6 +26,9 @@ public class MyTest2 {
 
     @Autowired
     private RedisHandler redisHandler;
+
+    @Autowired
+    private InterfaceController interfaceController;
 
     @Test
     public void test() {
@@ -78,7 +82,7 @@ public class MyTest2 {
 
     @Test
     public void test_8(){
-        roomController.givingGifts("2",100L);
+        roomController.givingGifts("3",23l);
     }
 
     @Test
@@ -87,4 +91,8 @@ public class MyTest2 {
     }
 
 
+    @Test
+    public void test_10(){
+        interfaceController.getUserInfo();
+    }
 }

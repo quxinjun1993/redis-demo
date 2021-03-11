@@ -3,7 +3,7 @@ package org.yijia.redisdemo.constants;
 public class Constants {
 
     public interface PackageHelp {
-        String PACKAGE_POOL = "package_pool";
+        String PACKAGE_POOL = "package:pool";
         String USER_PACKAGE_POOL = "user:package:pool";
         String USER_RANK = "user:rank";
     }
@@ -18,6 +18,11 @@ public class Constants {
         String ROOM_USER_HOME = "room:user:home";
         String ROOM_USER_ACTUAL = "room:user:actual";
         String ROOM_USER_SAVE = "room:user:save";
+    }
+
+    public interface InterfaceHelp{
+
+        String USER_INFO = "user:info";
     }
 }
 

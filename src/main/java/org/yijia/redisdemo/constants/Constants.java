@@ -23,6 +23,10 @@ public class Constants {
     public interface InterfaceHelp{
 
         String USER_INFO = "user:info";
+
+        String SAVE_MAP = "map";
+        String KEY_VALIDATE_SUFFIX = "validate";
+        String KEY_NX_SUFFIX = "nx";
     }
 }
 

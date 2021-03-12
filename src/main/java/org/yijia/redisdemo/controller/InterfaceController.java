@@ -2,6 +2,7 @@ package org.yijia.redisdemo.controller;
 
 import autumn.tools.redis.RedisHandler;
 import com.google.common.collect.Maps;
+import org.nutz.json.Json;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,16 +19,24 @@ public class InterfaceController {
     private RedisHandler redisHandler;
 
     @RequestMapping("/getUserInfo")
-    @MyAnnotation(isRedis = true, type = "Map")
+    @MyAnnotation(type = "Map", seconds = 30, isDurable = true)
     public Map<String, String> getUserInfo(String name, String id, String sex) {
+        System.out.println("当前进的控制器获取的数据");
         Map<String, String> map = Maps.newHashMap();
         map.put("id", id);
         map.put("name", name);
         map.put("sex", sex);
-//        redisHandler.builder().add(Cmd.hash.hmset(Constants.InterfaceHelp.USER_INFO, map)).exec();
-//        redisHandler.builder().add(Cmd.key.expire(Constants.InterfaceHelp.USER_INFO, 30)).exec();
-//        System.out.println("控制器中：" + map);
         return map;
+    }
+
+    @RequestMapping("/getNewUserInfo")
+    @MyAnnotation(type = "String", seconds = 30, isDurable = true)
+    public String getNewUserInfo(String name, String id, String sex) {
+        Map<String, String> map = Maps.newHashMap();
+        map.put("id", id);
+        map.put("name", name);
+        map.put("sex", sex);
+        return Json.toJson(map);
     }
 
     public void test() throws IOException {

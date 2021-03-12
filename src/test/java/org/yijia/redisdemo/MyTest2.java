@@ -13,6 +13,7 @@ import org.yijia.redisdemo.controller.RedPackageController;
 import org.yijia.redisdemo.controller.RoomController;
 import redis.clients.jedis.Jedis;
 
+import java.util.Map;
 import java.util.Properties;
 
 @SpringBootTest
@@ -64,58 +65,59 @@ public class MyTest2 {
     }
 
 
-
-
-
-
-
     @Test
-    public void test_4(){
+    public void test_4() {
         anchorController.getAllAnchorInfo();
     }
 
     @Test
-    public void test_5(){
+    public void test_5() {
         anchorController.beginToShow("1");
     }
 
     @Test
-    public void test_6(){
+    public void test_6() {
         anchorController.endToShow("1");
     }
 
 
     @Test
-    public void test_7(){
+    public void test_7() {
         roomController.inRoom("4");
     }
 
     @Test
-    public void test_8(){
-        roomController.givingGifts("2",50L);
+    public void test_8() {
+        roomController.givingGifts("1", 50L);
     }
 
     @Test
-    public void test_9(){
+    public void test_9() {
         roomController.outRoom("1");
     }
 
 
     @Test
-    public void test_10(){
-        interfaceController.getUserInfo("1","1","1");
+    public void test_10() {
+        interfaceController.getUserInfo("1", "1", "1");
     }
 
     @Test
-    public void test_11(){
+    public void test_10_1() {
+        interfaceController.getNewUserInfo("1", "1", "1");
+    }
+
+
+    @Test
+    public void test_11() {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
-                while (true){
+                while (true) {
                     try {
                         Jedis jedis = new Jedis("127.0.0.1", 6379);
-                        jedis.publish(Constants.RoomHelp.ROOM + ":9527","hello");
-                    }catch (Exception e){
+                        jedis.publish(Constants.RoomHelp.ROOM + ":9527", "hello");
+                    } catch (Exception e) {
 
                     }
                 }

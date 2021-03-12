@@ -80,6 +80,7 @@ public class RoomController {
             redisHandler.builder().add(Cmd.zset.zincrby(Constants.RoomHelp.ROOM_USER_ACTUAL + ROOM_ID, Double.parseDouble(oldMoney), userId)).exec();
             Jedis jedis = new Jedis("127.0.0.1", 6379);
             jedis.subscribe(reidsPubSub, Constants.RoomHelp.ROOM + ROOM_ID);
+//            redisHandler.subscribe(reidsPubSub,Constants.RoomHelp.ROOM + ROOM_ID);
         } else {
             logger.info("<------您已在房间内，操作出错！------>");
         }

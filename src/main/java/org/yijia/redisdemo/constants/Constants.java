@@ -20,11 +20,12 @@ public class Constants {
         String ROOM_USER_SAVE = "room:user:save";
     }
 
-    public interface InterfaceHelp{
+    public interface InterfaceHelp {
 
         String USER_INFO = "user:info";
 
         String SAVE_MAP = "map";
+        String SAVE_STRING = "String";
         String KEY_VALIDATE_SUFFIX = "validate";
         String KEY_NX_SUFFIX = "nx";
     }

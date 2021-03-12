@@ -13,9 +13,6 @@ import org.yijia.redisdemo.controller.RedPackageController;
 import org.yijia.redisdemo.controller.RoomController;
 import redis.clients.jedis.Jedis;
 
-import java.util.Map;
-import java.util.Properties;
-
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class MyTest2 {

@@ -124,8 +124,12 @@ public class MyAnnotationAspect {
 
 
     private void saveCacheObject(String key, String inType, int saveTime, Object obj, Boolean isFlag) {
-        if (Constants.InterfaceHelp.SAVE_MAP.equals(inType.toLowerCase(Locale.ROOT))) {
+        if (Constants.InterfaceHelp.SAVE_MAP.equalsIgnoreCase(inType)) {
             redisHandler.builder().add(Cmd.hash.hmset(key, (Map<String, String>) obj)).exec();
+            redisHandler.builder().add(Cmd.key.expire(key, saveTime)).exec();
+        }
+        if (Constants.InterfaceHelp.SAVE_STRING.equalsIgnoreCase(inType)) {
+            redisHandler.builder().add(Cmd.str.set(key, (String) obj)).exec();
             redisHandler.builder().add(Cmd.key.expire(key, saveTime)).exec();
         }
         //设置持久缓存   保存key真实过期时间
@@ -135,9 +139,15 @@ public class MyAnnotationAspect {
     }
 
     private Object getCacheObject(String key, String inType) {
-        if (Constants.InterfaceHelp.SAVE_MAP.equals(inType.toLowerCase(Locale.ROOT))) {
+        if (Constants.InterfaceHelp.SAVE_MAP.equalsIgnoreCase(inType)) {
             Map<String, String> result = redisHandler.builder().add(Cmd.hash.hgetall(key)).exec(Map.class);
             if (!result.isEmpty()) {
+                return result;
+            }
+        }
+        if (Constants.InterfaceHelp.SAVE_STRING.equalsIgnoreCase(inType)) {
+            String result = redisHandler.builder().add(Cmd.str.get(key)).exec(String.class);
+            if (result != null) {
                 return result;
             }
         }

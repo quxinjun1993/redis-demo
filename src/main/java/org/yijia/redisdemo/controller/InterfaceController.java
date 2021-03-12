@@ -19,7 +19,7 @@ public class InterfaceController {
     private RedisHandler redisHandler;
 
     @RequestMapping("/getUserInfo")
-    @MyAnnotation(type = "Map", seconds = 30, isDurable = true)
+    @MyAnnotation(type = "Map", seconds = 50, isDurable = true)
     public Map<String, String> getUserInfo(String name, String id, String sex) {
         System.out.println("当前进的控制器获取的数据");
         Map<String, String> map = Maps.newHashMap();
@@ -30,7 +30,7 @@ public class InterfaceController {
     }
 
     @RequestMapping("/getNewUserInfo")
-    @MyAnnotation(type = "String", seconds = 30, isDurable = true)
+    @MyAnnotation(type = "String", seconds = 50, isDurable = true)
     public String getNewUserInfo(String name, String id, String sex) {
         Map<String, String> map = Maps.newHashMap();
         map.put("id", id);

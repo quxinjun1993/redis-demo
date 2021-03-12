@@ -79,7 +79,7 @@ public class RedPackageController {
         logger.info("结果集:{}", set);
         set.iterator().forEachRemaining(obj -> {
             String money = redisHandler.builder().add(Cmd.hash.hget(Constants.PackageHelp.USER_PACKAGE_POOL, obj)).exec(String.class);
-            logger.info("<----------手气最佳：id为【{}】的用户,金额：【{}】---------->", obj,money);
+            logger.info("<----------手气最佳：id为【{}】的用户,金额：【{}】---------->", obj, money);
         });
     }
 
@@ -138,6 +138,7 @@ public class RedPackageController {
         });
         logger.info("最后的结果：{}", packageList);
         redisHandler.builder().add(Cmd.list.lpush(Constants.PackageHelp.PACKAGE_POOL, PackageUtils.transStringArray(packageList))).exec();
+        redisHandler.builder().add((Cmd.key.expire(Constants.PackageHelp.PACKAGE_POOL, (10 * 60)))).exec();
         redisHandler.builder().add(Cmd.key.del(Constants.PackageHelp.USER_PACKAGE_POOL)).exec();
         redisHandler.builder().add(Cmd.key.del(Constants.PackageHelp.USER_RANK)).exec();
         logger.info("<----------红包池已经设定---------->");
